@@ -312,18 +312,28 @@ def main():
             st.subheader("📋 Quick Reference")
             st.write("**Base Prices:**")
 
-            # Create a more readable table format
-            price_data = []
-            for base, prices in MENU_DATA["bases"].items():
-                price_data.append({
-                    "Salad Base": base,
-                    "Small": f"${prices['small']:.2f}",
-                    "Medium": f"${prices['medium']:.2f}",
-                    "Large": f"${prices['large']:.2f}"
-                })
+            # Create header row using columns
+            col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+            with col1:
+                st.write("**Salad Base**")
+            with col2:
+                st.write("**Small**")
+            with col3:
+                st.write("**Medium**")
+            with col4:
+                st.write("**Large**")
 
-            df = pd.DataFrame(price_data)
-            st.table(df)
+            # Create data rows
+            for base, prices in MENU_DATA["bases"].items():
+                col1, col2, col3, col4 = st.columns([3, 1, 1, 1])
+                with col1:
+                    st.write(base)
+                with col2:
+                    st.write(f"${prices['small']:.2f}")
+                with col3:
+                    st.write(f"${prices['medium']:.2f}")
+                with col4:
+                    st.write(f"${prices['large']:.2f}")
 
             st.write("**Premium Toppings:**")
             for topping, price in MENU_DATA["premium_toppings"].items():
