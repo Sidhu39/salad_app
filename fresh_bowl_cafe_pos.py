@@ -311,8 +311,19 @@ def main():
             # Show sample pricing
             st.subheader("📋 Quick Reference")
             st.write("**Base Prices:**")
+
+            # Create a more readable table format
+            price_data = []
             for base, prices in MENU_DATA["bases"].items():
-                st.write(f"- {base}: S${prices['small']:.2f} | M${prices['medium']:.2f} | L${prices['large']:.2f}")
+                price_data.append({
+                    "Salad Base": base,
+                    "Small": f"${prices['small']:.2f}",
+                    "Medium": f"${prices['medium']:.2f}",
+                    "Large": f"${prices['large']:.2f}"
+                })
+
+            df = pd.DataFrame(price_data)
+            st.table(df)
 
             st.write("**Premium Toppings:**")
             for topping, price in MENU_DATA["premium_toppings"].items():
